@@ -10,10 +10,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from todolist.serializers import todItemSerializer
+from .serializers import todItemSerializer
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 class todoItem_view(APIView):
-    #authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = []
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         todos = TodoItem.objects.all()
